@@ -1,0 +1,89 @@
+<html>
+  <head>
+    <title>Сложение больших чисел</title>
+  </head>
+  <body>
+    <style>
+      .input-block {
+        margin: 10px;
+      }
+    </style>
+    <script>
+
+      var calculate = function() {
+        var s1 = document.getElementById("int1").value;
+        var s2 = document.getElementById("int2").value;
+        var s = '';
+        var n1, n2, n3, l1, l2, i;
+        var c = '';
+
+        l1 = s1.length;
+        l2 = s2.length;
+
+        if(l1 > l2) {
+          s3 = s1;
+          l3 = l1;
+
+          s1 = s2;
+          l1 = l2;
+
+          s2 = s3;
+          l2 = l3;
+        }
+
+        s3 = '';
+        n3 = 0;
+
+        for(i = l1; i >= 1; i--) {
+          n1 = parseInt(s1.charAt(i-1));
+          n2 = parseInt(s2.charAt(l2-1));
+          l2 = l2 - 1;
+          c = (n1 + n2 + n3) % 10;
+          s3 = c + s3;
+          if(n1 + n2 + n3 > 9) {
+            n3 = 1
+          }
+          else {
+            n3 = 0;
+          }
+        }
+
+
+        while(n3 == 1) {
+          if(l2 != 0) {
+            n2 = parseInt(s2.charAt(l2 - 1));
+            l2 = l2 - 1;
+            c = (n2 + n3) % 10;
+            s3 = c + s3;
+            if((n2 + n3) < 10) {
+              n3 = 0;
+            }
+          }
+          else {
+            s3 = '1' + s3;
+            n3 = 0;
+          }
+        }
+
+        if(l2 != 0) {
+          s3 = s2.substring(0, l2) + s3;
+        }
+
+        console.log('Сумма чисел равна: ' + s3);
+        alert('Сумма чисел равна: ' + s3);
+
+      }
+    </script>
+    <div class="input-block">
+      <span>Первое число</span><br>
+      <input id="int1">
+    </div>
+    <div class="input-block">
+      <span>Второе число</span><br>
+      <input id="int2">
+    </div>
+    <div class="input-block">
+      <button onclick="calculate()">Посчитать сумму</button>
+    </div>
+  </body>
+</html>
